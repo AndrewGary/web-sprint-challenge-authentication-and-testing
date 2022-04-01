@@ -53,9 +53,21 @@ const validatePassword = (req, res, next) => {
     }
 }
 
+const checkForUsernameBeforeRegister = (req, res, next) => {
+    Users.findBy({username: req.body.username})
+    .then(user => {
+        if(user.length){
+            next({ status: 401, message: 'username already exists'});
+        }else{
+            next();
+        }
+    })
+}
+
 module.exports = {
     restrict,
     validateUsernameExists,
     validateReqBody,
-    validatePassword
+    validatePassword,
+    checkForUsernameBeforeRegister
 }
