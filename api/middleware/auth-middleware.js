@@ -1,4 +1,4 @@
-const JWT_SECRET = 'jackpot'
+const JWT_SECRET = process.env.JWT_SECRET || 'shh';
 const Users = require('../users/users-model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
