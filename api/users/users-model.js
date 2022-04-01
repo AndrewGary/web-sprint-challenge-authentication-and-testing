@@ -11,4 +11,5 @@ const addUser = async (user) => {
 
 module.exports = {
     addUser,
+    findBy,
 }
