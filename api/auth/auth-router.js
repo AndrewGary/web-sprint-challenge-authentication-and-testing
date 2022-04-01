@@ -3,7 +3,7 @@ const Users = require('../users/users-model');
 const bcrypt = require('bcryptjs');
 const { checkForUsernameBeforeRegister, validateUsernameExists, validateReqBody, validatePassword } = require('../middleware/auth-middleware');
 
-router.post('/register', checkForUsernameBeforeRegister, (req, res, next) => {
+router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, res, next) => {
 
   //things we need to know at this point
   const hash = bcrypt.hashSync(req.body.password);
