@@ -1,3 +1,11 @@
+/************************************************************************
+ * MOVED THIS FUNCTION INTO    ------
+ * ----------- THE AUTH-MIDDLEWARE.JS
+ * --------------------- FILE -------
+ *  * *****************************************************************
+ */
+  
+  
   /*
     IMPLEMENT
 
@@ -10,12 +18,12 @@
       the response body should include a string exactly as follows: "token invalid".
   */
 
-const restricted = (req, res, next) => {
+// const restricted = (req, res, next) => {
 
-  next();
-}
+//   next();
+// }
 
 
-module.exports = {
-  restricted
-}
+// module.exports = {
+//   restricted
+// }

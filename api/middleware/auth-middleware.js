@@ -64,10 +64,15 @@ const checkForUsernameBeforeRegister = (req, res, next) => {
     })
 }
 
+const createToken = (req, res, next) => {
+    
+}
+
 module.exports = {
     restrict,
     validateUsernameExists,
     validateReqBody,
     validatePassword,
-    checkForUsernameBeforeRegister
+    checkForUsernameBeforeRegister,
+    createToken
 }

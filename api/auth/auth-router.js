@@ -11,6 +11,7 @@ router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, 
   req.body.password = hash;
   Users.addUser(req.body)
   .then(user => {
+    user = user[0];
     res.status(200).json(user)
   })
   .catch(error => {
@@ -46,7 +47,7 @@ router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, 
 });
 
 router.post('/login', validateReqBody, validateUsernameExists, validatePassword, (req, res, next) => {
-    res.status(200).json({ message: `welcome, ${req.user.username}`})
+    res.status(200).json({ message: `welcome, ${req.user.username}`, token})
  
   /*
     IMPLEMENT
