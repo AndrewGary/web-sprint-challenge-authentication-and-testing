@@ -5,7 +5,6 @@ const { createToken, checkForUsernameBeforeRegister, validateUsernameExists, val
 
 router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, res, next) => {
 
-  //things we need to know at this point
   const hash = bcrypt.hashSync(req.body.password);
   
   req.body.password = hash;
@@ -17,7 +16,6 @@ router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, 
   .catch(error => {
     next(error);
   })
-  
 
   /*
     IMPLEMENT

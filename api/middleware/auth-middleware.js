@@ -3,9 +3,8 @@ const Users = require('../users/users-model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-
-
 const restrict = (req, res, next) => {
+
     const token = req.headers.authorization;
 
     if(!token){

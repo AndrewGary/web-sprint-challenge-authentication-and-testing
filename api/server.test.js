@@ -120,23 +120,3 @@ describe('auth tests', () => {
 
   })
 })
-
-
-
-// describe('auth tests', () => {
-//   describe('POST to /api/auth/register endpoint', () => {
-//     it('returns correct error if username or password is not provided', () => {
-//       let test = await request(server)
-//       .post('/api/auth/register')
-//       .send({ username: 'TESSTTT', password: ''})
-
-//       expect(res.body.message).toBe('username and password required');
-
-//       test = await request(server)
-//       .post('/api/auth/register')
-//       .send({ username: '', password: 'TESTTTTTT'})
-
-//       expect(res.body.message).toBe('username and password required')
-//     })
-//   })
-// })
