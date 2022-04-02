@@ -63,13 +63,65 @@ describe('auth tests', () => {
     })
   })
 
-  // describe('POST /api/auth/login' () => {
-  //   it('')
-  // })
+  describe('POST /api/auth/login', () => {
+    it('checking for correct resp with correct credentials', async () => {
+
+      await request(server)
+        .post('/api/auth/register')
+        .send({ username: 'Andrew', password: '1234'})
+
+      let test = await request(server)
+      .post('/api/auth/login')
+      .send({ username: 'Andrew', password: '1234'})
+
+      const { message, token } = test.body;
+
+      expect(message).toBe(`welcome, Andrew`);
+    })
+
+    it('check for correct resp with invalid credentials', async () => {
+      const test = await request(server)
+      .post('/api/auth/login')
+      .send({ username: 'TESTTTTTT', password: 'TESSTTTTT'})
+
+      expect(test.body.message).toBe('invalid credentials');
+    })
+  })
+
+  describe('jokes router', () => {
+    it('checking for correct resp with valid credentials', async () => {
+      await request(server)
+        .post('/api/auth/register')
+        .send({ username: 'Andrew', password: '1234'})
+
+        let test = await request(server)
+        .post('/api/auth/login')
+        .send({ username: 'Andrew', password: '1234'})
+  
+        const { token } = test.body;
+
+        const testing = await request(server)
+        .get('/api/jokes')
+        .send()
+        .set({ Authorization: token})
+
+        expect(testing.body.length).toBe(3)
+    })
+
+    it('checking for correct resp with no token', async () => {
+
+        const testing = await request(server)
+        .get('/api/jokes')
+        .send()
+
+        expect(testing.body.message).toBe('token required')
+    })
+  
+
+  })
 })
 
-describe('jokes router', () => {
-})
+
 
 // describe('auth tests', () => {
 //   describe('POST to /api/auth/register endpoint', () => {
