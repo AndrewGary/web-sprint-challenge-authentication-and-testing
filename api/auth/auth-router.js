@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Users = require('../users/users-model');
 const bcrypt = require('bcryptjs');
-const { checkForUsernameBeforeRegister, validateUsernameExists, validateReqBody, validatePassword } = require('../middleware/auth-middleware');
+const { createToken, checkForUsernameBeforeRegister, validateUsernameExists, validateReqBody, validatePassword } = require('../middleware/auth-middleware');
 
 router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, res, next) => {
 
@@ -46,8 +46,8 @@ router.post('/register', validateReqBody, checkForUsernameBeforeRegister, (req, 
   */
 });
 
-router.post('/login', validateReqBody, validateUsernameExists, validatePassword, (req, res, next) => {
-    res.status(200).json({ message: `welcome, ${req.user.username}`, token})
+router.post('/login', validateReqBody, validateUsernameExists, validatePassword, createToken, (req, res, next) => {
+    res.status(200).json({ message: `welcome, ${req.user.username}`, token: req.token})
  
   /*
     IMPLEMENT

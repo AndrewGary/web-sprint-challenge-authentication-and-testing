@@ -65,7 +65,21 @@ const checkForUsernameBeforeRegister = (req, res, next) => {
 }
 
 const createToken = (req, res, next) => {
-    
+    const token = tokenBuilder(req.user)
+    req.token = token;
+    next();
+}
+
+const tokenBuilder = (user) => {
+    const payload = {
+        subject: user.id,
+        username: user.username
+    }
+    const options = {
+        expiresIn: '1d'
+    }
+
+    return jwt.sign(payload, JWT_SECRET, options)
 }
 
 module.exports = {
